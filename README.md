@@ -4,4 +4,7 @@
 Link to dataset: https://ourworldindata.org/covid-deaths
 
 ## Microsoft Excel
-- Created 2 tables by removing unnecessary columns 
+- Removed unnecessary columns and created two tables - CovidDeaths and CovidVaccinations
+
+## MS SQL Server
+
