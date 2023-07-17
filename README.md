@@ -9,7 +9,12 @@ Link to dataset: https://ourworldindata.org/covid-deaths
 ## MS SQL Server (SQL Covid Data Explroation.sql and SQL Queries for Tableau.sql files)
 1. Imported created tables into Database
 2. Data Exploration
-   - dsadas
-   - dasdas
+   - Likelihood of dying if you got infected by covid in USA
+   - Percentage of population got Covid in Poland
+   - Countries with highiest infection rate compared to population
+   - Countries with highiest death count
+   - Continents with highest death count
+   - Population vs vaccinations
+   - Created CTE and percentage of population vaccinated
 3. Created tables and saved in Excel for Tableau visualization
 
