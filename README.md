@@ -11,5 +11,5 @@ Link to dataset: https://ourworldindata.org/covid-deaths
 2. Data Exploration
    - dsadas
    - dasdas
-3. Created tables for Tableau visualization
+3. Created tables and saved in Excel for Tableau visualization
 
