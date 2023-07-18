@@ -24,4 +24,4 @@ Created vizualization which included:
 - Total Deaths Per Continent
 - Percentage Population Infected Per Country and predictions for future months
 
-
+[Click here to see interactive dashboard](https://public.tableau.com/app/profile/wiktor.paprocki/viz/CovidDashboard_16874431741680/Dashboard1)
