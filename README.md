@@ -22,6 +22,6 @@ Link to dataset: https://ourworldindata.org/covid-deaths
 Created vizualization which included:
 - Global Numbers
 - Total Deaths Per Continent
-- Percentage Population Infected
+- Percentage Population Infected Per Country and predictions for future months
 
 
