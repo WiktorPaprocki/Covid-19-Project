@@ -23,7 +23,7 @@ ORDER BY
 -- Likelihood of dying if you got infected by covid in USA
 SELECT 
 	location, 
-	date, 
+	FORMAT(date, 'yyyy-MM-dd') as Date,
 	total_cases, 
 	total_deaths, 
 	(total_deaths/total_cases)*100 AS Death_percentage
@@ -33,12 +33,12 @@ WHERE
 	location LIKE '%states%'
 	AND total_cases IS NOT NULL 
 	AND continent IS NOT NULL
-ORDER BY 1;
+ORDER BY 2;
 
 -- Percentage of population infected with Covid in Poland
 SELECT 
 	location, 
-	date, 
+	FORMAT(date, 'yyyy-MM-dd') as Date,
 	total_cases, 
 	population, 
 	(total_cases/population)*100 AS Percentage_of_infected_population
@@ -49,7 +49,7 @@ WHERE
 	AND total_cases IS NOT NULL 
 	AND continent IS NOT NULL
 ORDER BY 
-	location;
+	Date;
 
 -- Countries with highiest infection rate compared to population
 SELECT 
@@ -93,7 +93,7 @@ ORDER BY
 SELECT 
 	dea.continent, 
 	dea.location, 
-	dea.date, 
+	FORMAT(dea.date, 'yyyy-MM-dd') AS Date, 
 	dea.population, 
 	vac.new_vaccinations, 
 	SUM(CONVERT(INT, vac.new_vaccinations)) OVER (PARTITION BY dea.location) AS People_vaccinated
@@ -111,7 +111,8 @@ WITH PopvsVac AS (
 	SELECT 
 		dea.continent, 
 		dea.location, 
-		dea.date, dea.population, 
+		FORMAT(dea.date, 'yyyy-MM-dd') AS Date,
+		dea.population, 
 		vac.new_vaccinations, 
 		SUM(CONVERT(INT, vac.new_vaccinations)) OVER (PARTITION BY dea.location) AS People_vaccinated
 	FROM 
@@ -142,7 +143,7 @@ RollingPeopleVaccinated numeric
 INSERT INTO #PercentPopulationVaccinated
 	Select dea.continent, 
 	dea.location, 
-	dea.date, 
+	FORMAT(dea.date, 'yyyy-MM-dd') AS Date, 
 	dea.population, 
 	vac.new_vaccinations, 
 	SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition by dea.Location) as RollingPeopleVaccinated
