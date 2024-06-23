@@ -15,16 +15,7 @@ Link to dataset: https://ourworldindata.org/covid-deaths
    - Countries with highiest death count
    - Continents with highest death count
    - Population vs vaccinations
-   - Created CTE and percentage of population vaccinated
-3. Created tables and saved them in Excel for Tableau visualization
-
-## Tableau 
-Created vizualization which included:
-- Global Numbers
-- Total Deaths Per Continent
-- Percentage Population Infected Per Country and predictions for future months
-
-[Click here to open interactive dashboard](https://public.tableau.com/app/profile/wiktor.paprocki/viz/CovidDashboard_16874431741680/Dashboard1)
-<br><br>
-![Covid Dashboard](https://github.com/WiktorPaprocki/Covid-19-Project/assets/125204368/8d021223-2f85-4480-8a0e-ec056ccac174)
+   - Created CTE
+   - Created Temp Table
+   - Created View
 
