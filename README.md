@@ -6,7 +6,7 @@ Link to dataset: https://ourworldindata.org/covid-deaths
 ## Microsoft Excel
 - Removed unnecessary columns and created two tables - CovidDeaths and CovidVaccinations
 
-## MS SQL Server (SQL Covid Data Explroation.sql and SQL Queries for Tableau.sql files)
+## MS SQL Server (SQL Covid Data Explroation.sql)
 1. Imported created tables into Database
 2. Data Exploration
    - Likelihood of dying if you got infected by covid in USA
