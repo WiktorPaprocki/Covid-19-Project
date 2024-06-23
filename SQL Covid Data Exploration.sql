@@ -96,7 +96,7 @@ SELECT
 	FORMAT(dea.date, 'yyyy-MM-dd') AS Date, 
 	dea.population, 
 	vac.new_vaccinations, 
-	SUM(CONVERT(INT, vac.new_vaccinations)) OVER (PARTITION BY dea.location) AS People_vaccinated
+	SUM(CONVERT(INT, vac.new_vaccinations)) OVER (PARTITION BY dea.location) AS SUM_People_vaccinated
 FROM 
 	CovidDeaths AS dea 
 JOIN 
@@ -114,7 +114,7 @@ WITH PopvsVac AS (
 		FORMAT(dea.date, 'yyyy-MM-dd') AS Date,
 		dea.population, 
 		vac.new_vaccinations, 
-		SUM(CONVERT(INT, vac.new_vaccinations)) OVER (PARTITION BY dea.location) AS People_vaccinated
+		SUM(CONVERT(INT, vac.new_vaccinations)) OVER (PARTITION BY dea.location) AS SUM_People_vaccinated
 	FROM 
 		CovidDeaths AS dea 
 	JOIN 
@@ -124,7 +124,7 @@ WITH PopvsVac AS (
 		AND population IS NOT NULL
 	)
 
-SELECT *, (People_vaccinated/population)*100 AS Percentage_of_population_vaccinated
+SELECT *, (SUM_People_vaccinated/population)*100 AS Percentage_of_population_vaccinated
 FROM PopvsVac
 
 -- Using Temp Table to perform Calculation on Partition By in previous query
@@ -134,7 +134,7 @@ Create Table #PercentPopulationVaccinated
 (
 Continent nvarchar(255),
 Location nvarchar(255),
-Date datetime,
+Date date,
 Population numeric,
 New_vaccinations numeric,
 RollingPeopleVaccinated numeric
@@ -143,10 +143,10 @@ RollingPeopleVaccinated numeric
 INSERT INTO #PercentPopulationVaccinated
 	Select dea.continent, 
 	dea.location, 
-	FORMAT(dea.date, 'yyyy-MM-dd') AS Date, 
+	FORMAT(dea.date, 'yyyy-MM-dd'), 
 	dea.population, 
 	vac.new_vaccinations, 
-	SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition by dea.Location) as RollingPeopleVaccinated
+	SUM(CONVERT(int,vac.new_vaccinations)) OVER (PARTITION BY dea.Location ORDER BY dea.location, dea.date) as Rolling_people_vaccinated
 FROM 
 	CovidDeaths AS dea
 JOIN
@@ -156,11 +156,11 @@ WHERE
 ORDER BY
 	2,3
 
-Select *, (RollingPeopleVaccinated/Population)*100
+Select *, (RollingPeopleVaccinated/Population)*100 AS percent_of_population_vaccinated
 From #PercentPopulationVaccinated
 
 
--- Creating view to store data for later visualization
+-- Creating view to store data
 CREATE VIEW  Percent_population_vaccinated AS
 	SELECT 
 		dea.continent, 
@@ -168,7 +168,7 @@ CREATE VIEW  Percent_population_vaccinated AS
 		dea.date, 
 		dea.population, 
 		vac.new_vaccinations, 
-		SUM(CONVERT(INT, vac.new_vaccinations)) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS People_vaccinated
+		SUM(CONVERT(INT, vac.new_vaccinations)) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS Rolling_people_vaccinated
 	FROM 
 		CovidDeaths AS dea 
 	JOIN 
